@@ -87,11 +87,11 @@ $(function() {
 
         beforeEach(function(done) {
             loadFeed(0, done);
+            done();
         });
 
-        it('AJAX call must have at least 1 item', function(done) {
-            expect($('.feed .entry').length).toBeGreaterThan(1);
-            done();
+        it('AJAX call must have at least 1 item', function() {
+            expect($('.feed .entry').length).toBeGreaterThan(0);
         });
     });
 
@@ -102,8 +102,8 @@ $(function() {
          * Remember, loadFeed() is asynchronous.
          */
 
-        var title1stFeed = '';
-        var title2ndFeed = '';
+        var title1stFeed;
+        var title2ndFeed;
 
         // Call the ajax functions
         beforeEach(function(done) {
@@ -112,17 +112,22 @@ $(function() {
                 // Get news for the first link
                 title1stFeed = $('.entry-link')[0].href;
                 console.log(title1stFeed);
+                // Second ajax call
+                loadFeed(1, function() {
+                    // Get news for the first link
+                    title2ndFeed = $('.entry-link')[0].href;
+                    console.log(title2ndFeed);
+                    done()
+                });
             });
-            // Second ajax call
-            loadFeed(1, function() {
-                // Get news for the first link
-                title2ndFeed = $('.entry-link')[0].href;
-                console.log(title2ndFeed);
-                done()
-            });
+
         });
 
         it('Change feed should display new data', function(done) {
+            console.log(title1stFeed);
+            console.log(title2ndFeed);
+            expect(title1stFeed).toBeDefined();
+            expect(title2ndFeed).toBeDefined();
             expect(title1stFeed).not.toEqual(title2ndFeed);
             done();
         });
