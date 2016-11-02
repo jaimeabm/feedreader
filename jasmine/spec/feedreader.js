@@ -90,8 +90,8 @@ $(function() {
             done();
         });
 
-        it('AJAX call must have at least 1 item', function() {
-            expect($('.feed .entry').length).toBeGreaterThan(0);
+        it('AJAX call must have at least 1 item', function(done) {
+            expect($('.feed .entry').length).toBeGreaterThan(1);
         });
     });
 
@@ -117,7 +117,7 @@ $(function() {
                     // Get news for the first link
                     title2ndFeed = $('.entry-link')[0].href;
                     console.log(title2ndFeed);
-                    done()
+                    done();
                 });
             });
 
