@@ -6,8 +6,8 @@
 
 /* We're placing all of our tests within the $() function,
  * since some of these tests may require DOM elements. We want
- * to ensure they don't run until the DOM is ready.
- */
+ * to ensure they don't run until the DOM is ready.*/
+
 $(function() {
     /* This is our first test suite - a test suite just contains
      * a related set of tests. This suite is all about the RSS
@@ -87,11 +87,10 @@ $(function() {
 
         beforeEach(function(done) {
             loadFeed(0, done);
-            done();
         });
 
-        it('AJAX call must have at least 1 item', function(done) {
-            expect($('.feed .entry').length).toBeGreaterThan(1);
+        it('AJAX call must have at least 1 item', function() {
+            expect($('.feed .entry').length).toBeGreaterThan(0);
         });
     });
 
@@ -101,7 +100,6 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-
         var title1stFeed;
         var title2ndFeed;
 
@@ -132,4 +130,6 @@ $(function() {
             done();
         });
     });
+
+
 }());
